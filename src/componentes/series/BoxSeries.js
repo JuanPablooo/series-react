@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import FormularioSeries from './formulario';
+import FormularioSeries from './FormularioSeries';
 import TabelaSeries from './TabelaSeries';
 
 
@@ -45,10 +45,17 @@ class BoxSeries extends Component{
     }
     render(){
         return(
-            <div>
-                <FormularioSeries enviaDados = {this.enviaDados} />
-                {/* enviando as sereis para a tabela series */}
-                <TabelaSeries  series={this.state.series} /> 
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-md-4" >
+                        <FormularioSeries enviaDados = {this.enviaDados} />
+                    </div>
+                    <div className="col-md-8" >
+                        {/* enviando as sereis para a tabela series */}
+                        <TabelaSeries  series={this.state.series} /> 
+                    </div>
+
+                </div>
             </div>
         )
     }

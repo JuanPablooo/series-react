@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import BoxSeries from './componentes/series/BoxSeries'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import BoxSeries from './componentes/series/BoxSeries';
 
 
 

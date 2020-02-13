@@ -26,24 +26,30 @@ class FormularioSeries extends Component{
 	}
     render(){
         return(
-            <div>
+            <div className="card">
+				<div className="card-header" >
+					<h5>Cadastro de series</h5>
+				</div>
+				<div className="card-body">
                 <form method="post" onSubmit={this.enviaDados} >
-					<div className="form" >
+					<div className="form-group" >
 						<label htmlFor="nome">Nome</label>
-						<input type="text" id="nome" name="nome" 
+						<input type="text" id="nome" name="nome"  className="form-control"
 						onChange={this.inputRendler}  value={this.state.nome}></input>
 						<label htmlFor="lancamento">Ano de Lançamento</label>
-						<input type="text" id="lancamento" name="ano_lancamento"
+						<input type="text" id="lancamento" name="ano_lancamento" className="form-control"
 						 value={this.state.ano_lancamento} onChange={this.inputRendler} ></input>
 						<label htmlFor="temporadas">Temporadas</label>
-						<input type="text" id="temporadas" name="temporadas"
+						<input type="text" id="temporadas" name="temporadas" className="form-control"
 						onChange={this.inputRendler} value={this.state.temporadas}
 						></input>
 						<label htmlFor="sinopse">Sinopse</label>
-						<textarea id="sinopse" name="sinopse" value={this.state.sinopse} onChange={this.inputRendler}></textarea>
-						<button type="submit">Salvar</button>
+						<textarea id="sinopse" name="sinopse" value={this.state.sinopse} className="form-control" onChange={this.inputRendler}></textarea>
+						<button type="submit" className="bbn btn-success form-control mt-3">Salvar</button>
 					</div>
 				</form>
+
+				</div>
             </div>
         )
     }

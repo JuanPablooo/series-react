@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 
 const TabelaHead =()=>{
     return (
-        <thead>
+        <thead className="thead-dark">
             <tr>
                 <th>Nome</th>
                 <th>Lançamento</th>
@@ -18,12 +18,12 @@ const TabelaBody = (props)=>{
         <tbody>
             {props.series.map(serie =>{
                 return (
-                    <tr key={serie.id}>
-                        <td>{serie.nome}</td>
-                        <td>{serie.ano_lancamento}</td>
-                        <td>{serie.temporadas}</td>
-                        <td>{serie.sinopse}</td>
-                    </tr>
+                        <tr key={serie.id}>
+                            <td>{serie.nome}</td>
+                            <td>{serie.ano_lancamento}</td>
+                            <td>{serie.temporadas}</td>
+                            <td>{serie.sinopse}</td>
+                        </tr>                
 
                 )
             })}
@@ -35,10 +35,11 @@ class TabelaSeries extends Component{
     render(){
         const {series} = this.props;
         return (
-            <div>
-                <div className="list">
+            <div className="card">
+                <div className="card-header">lista de series</div>
+                <div className="card-body">
                     {/* {this.props.series} */}
-					<table>
+					<table className="table table-striped table-hover">
                         <TabelaHead/>
 						
 						<TabelaBody  series = {series}/>
