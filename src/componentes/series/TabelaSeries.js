@@ -1,50 +1,62 @@
 import React, {Component} from 'react';
+import './TabelaSeries.css';
 
 
-const TabelaHead =()=>{
+const ListaSeries = (props)=>{
+    
+
     return (
-        <thead className="thead-dark">
-            <tr>
-                <th>Nome</th>
-                <th>Lançamento</th>
-                <th>Temporadas</th>
-                <th>Sinopse</th>
-            </tr>
-		</thead>
-    )
-}
-const TabelaBody = (props)=>{
-    return (
-        <tbody>
+        <div className="card-body card-body-flex">
+            
             {props.series.map(serie =>{
-                return (
-                        <tr key={serie.id}>
-                            <td>{serie.nome}</td>
-                            <td>{serie.ano_lancamento}</td>
-                            <td>{serie.temporadas}</td>
-                            <td>{serie.sinopse}</td>
-                        </tr>                
+                return (        
+                    <div className="card card-serie" key={serie.id}>
+                        <div className="card-header">
+                            <h5 className="card-title">{serie.nome}</h5> 
+                            <h6 className="card-title text-muted">{serie.ano_lancamento}</h6> 
+                        </div>
+                        <div className="card-body">
+                            <img src="/logo192.png" className="card-img" />
+                        </div>
+                        <div className="card-footer">
+                            {serie.temporadas}
+                            {serie.temporadas > 1 ? ' temporadas' : ' temporada'}
+                            <br />
+                            <a href="#" >Sinopse </a> <br />
+                            <div className="text-center mt-1">
+                                <button className="btn btn-outline-danger btn-sm mr-2" 
+                                onClick={() => { 
+                                    if(window.confirm('confirma a exclusão ?'))
+                                        props.deleta(serie.id)
+                                    }
+                                }>delete</button>
+                                <button className="btn btn-outline-warning btn-sm ">Editar</button>
+                            </div>
+                        </div>
 
-                )
+                    </div>
+                );
             })}
-        </tbody>
-    )
+       </div>
+    );
 }
 class TabelaSeries extends Component{
+    
 
     render(){
-        const {series} = this.props;
+        const {series, deleta} = this.props;
         return (
             <div className="card">
-                <div className="card-header">lista de series</div>
-                <div className="card-body">
-                    {/* {this.props.series} */}
-					<table className="table table-striped table-hover">
-                        <TabelaHead/>
-						
-						<TabelaBody  series = {series}/>
-					</table>
-				</div>
+
+                <div className="card-header">
+                    <h5 className="text-center" >Lista series</h5>
+                </div>
+
+                
+
+                    
+                <ListaSeries series={series} deleta ={deleta}/>
+				
             </div>
         )
     }

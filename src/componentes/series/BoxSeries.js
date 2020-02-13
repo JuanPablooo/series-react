@@ -10,7 +10,9 @@ class BoxSeries extends Component{
     constructor(){
 		super();
 		this.state={series: []}
-	}
+    }
+    
+
 	//apos a montagem do componete
 	async componentDidMount(){
 		//mechendo no estado do componente
@@ -36,12 +38,28 @@ class BoxSeries extends Component{
         };
         
         const retorno = await fetch(url, options );
-        console.log(retorno)
-            // .then( response => response.json() )
-            // .then( data => console.log (data));
+        if(retorno.status == 201){
+            console.log('enviado');
+            serie = await retorno.json();
+            this.setState({series: [...this.state.series, serie]})
+        }
           
           
          
+    }
+    deleta = async (id)=>{
+        const seriesAtual = this.state.series
+        const params = {
+            method: 'DELETE',
+        }
+        const retorno  = await fetch('http://localhost:3000/series/'+id, params);
+        if(retorno.status === 204){
+            this.setState({
+                series: seriesAtual.filter((serie) => {
+                    return serie.id != id;
+                })
+            })
+        }
     }
     render(){
         return(
@@ -52,7 +70,7 @@ class BoxSeries extends Component{
                     </div>
                     <div className="col-md-8" >
                         {/* enviando as sereis para a tabela series */}
-                        <TabelaSeries  series={this.state.series} /> 
+                        <TabelaSeries  series={this.state.series} deleta={this.deleta} /> 
                     </div>
 
                 </div>
