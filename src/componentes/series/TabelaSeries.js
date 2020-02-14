@@ -8,7 +8,7 @@ const ListaSeries = (props)=>{
     return (
         <div className="card-body card-body-flex">
             
-            {props.series.map(serie =>{
+            {props.series.map(serie => {
                 return (        
                     <div className="card card-serie" key={serie.id}>
                         <div className="card-header">
@@ -30,7 +30,14 @@ const ListaSeries = (props)=>{
                                         props.deleta(serie.id)
                                     }
                                 }>delete</button>
-                                <button className="btn btn-outline-warning btn-sm ">Editar</button>
+                                <button className="btn btn-outline-warning btn-sm " 
+                                onClick={ ()=> {
+                                    console.log("entrou")
+                                        props.consulta(serie)
+                                    }
+                                
+                                } 
+                                >Editar</button>
                             </div>
                         </div>
 
@@ -42,9 +49,11 @@ const ListaSeries = (props)=>{
 }
 class TabelaSeries extends Component{
     
-
+    consulta = (serie) =>{
+        this.setState({})
+    }
     render(){
-        const {series, deleta} = this.props;
+        const {series, deleta, consulta } = this.props;
         return (
             <div className="card">
 
@@ -55,7 +64,7 @@ class TabelaSeries extends Component{
                 
 
                     
-                <ListaSeries series={series} deleta ={deleta}/>
+                <ListaSeries series={series} deleta ={deleta}  consulta={this.onsulta}/>
 				
             </div>
         )
