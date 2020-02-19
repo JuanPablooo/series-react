@@ -25,27 +25,50 @@ class BoxSeries extends Component {
         console.log('pronto');
     }
 
-    enviaDados = async (serie) => {
+    enviaDados = async (serie)=>{
         console.log('enviando dados');
+        // let {serie} = this.state;
         console.log(serie)
-        const url = 'http://localhost:3000/series';
+        const urlParam = serie.id  || '' ;
+        const method = serie.id ? "PUT" : "POST";
+        const url = 'http://localhost:3000/series/'+urlParam;
         const options = {
-            method: 'POST',
+            method: method,
             headers: {
                 "Content-type": 'application/json'
             },
-            body: JSON.stringify(serie)
+            body: JSON.stringify( serie )
         };
-
-        const retorno = await fetch(url, options);
-        if (retorno.status == 201) {
-            console.log('enviado');
+        try {
+            
+            const retorno = await fetch(url, options );
+            console.log(serie)
+            console.log(serie)
+            console.log('enviando');
             serie = await retorno.json();
-            this.setState({ series: [...this.state.series, serie] })
+            if(retorno.status === 201){
+                console.log('enviado');
+                return this.setState(
+                        {
+                            series: [...this.state.series, serie],
+                            serie: this.novaSerie
+                        }
+                    )
+            }
+            if(retorno.status === 200){
+                return this.setState(
+                    {
+                        series: this.state.series.map(ser => ser.id == serie.id ? serie:ser),
+                        serie:this.novaSerie
+                    }
+                )
+            }
+        } catch (error) {
+            console.log(error)
         }
-
-
-
+          
+          
+         
     }
     deleta = async (id) => {
         const seriesAtual = this.state.series
@@ -72,7 +95,6 @@ class BoxSeries extends Component {
                         {/* enviando as sereis para a tabela series */}
                         <TabelaSeries series={this.state.series} deleta={this.deleta} />
                     </div>
-
                 </div>
             </div>
         )

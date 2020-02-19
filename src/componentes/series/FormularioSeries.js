@@ -4,6 +4,7 @@ class FormularioSeries extends Component{
     constructor(){
         super()
         this.stateInicial = {
+			id: null,
 			nome: "",
 			temporadas: "",
 			sinopse: "",

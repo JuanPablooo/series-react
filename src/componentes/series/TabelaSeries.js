@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import './TabelaSeries.css';
 import PubSub from "pubsub-js";
+import './TabelaSeries.css';
 
 const ListaSeries = (props)=>{
     
