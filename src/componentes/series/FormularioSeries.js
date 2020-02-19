@@ -1,5 +1,5 @@
 import React , {Component} from "react";
-
+import PubSub from "pubsub-js";
 class FormularioSeries extends Component{
     constructor(){
         super()
@@ -10,7 +10,12 @@ class FormularioSeries extends Component{
 			ano_lancamento: ""
         }
 
-        this.state = this.stateInicial;
+		this.state = this.stateInicial;
+		PubSub.subscribe('editing', (msg, serie)=>{
+			console.log(msg + "---" );
+			console.log(serie)
+			this.setState(serie)
+		})
     }
     inputRendler = (event) =>{
         console.log(event.target.name);
