@@ -28,7 +28,7 @@ export default class Loguin extends Component{
             })
         }
         try {
-            const retorno = await fetch("http://localhost:3000/autenticar", params)
+            const retorno = await fetch("http://localhost:3000/auth/autenticar", params)
             console.log(retorno)
             const usuario = await retorno.json();
             console.log(usuario)
