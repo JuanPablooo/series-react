@@ -3,11 +3,12 @@ import PubSub from "pubsub-js";
 import './TabelaSeries.css';
 
 const ListaSeries = (props)=>{
-    
+    if(props.series.erro){
+    return <h1>{props.series.erro}</h1>
+    }
 
     return (
         <div className="card-body card-body-flex">
-            
             {props.series.map(serie =>{
                 return (        
                     <div className="card card-serie" key={serie.id}>
@@ -52,6 +53,9 @@ class TabelaSeries extends Component{
 
     render(){
         const {series, deleta} = this.props;
+        console.log("-=-=-=-")
+        console.log(series)
+        console.log("-=-=-=-")
         return (
             <div className="card">
 

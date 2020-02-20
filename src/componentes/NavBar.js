@@ -1,9 +1,23 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom';
+import {signOut} from   '../services/auth-service';
+
 
 export default class Navbar extends Component{
+    constructor(){
+        super()
+        this.state = {
+            signOut:false
+        }
+    }
+    signOut = (e)=>{
+        signOut()
+    }
 
     render(){
+        if(this.state.signOut){
+            return <Redirect to="/login"/>
+        }
         return(
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <Link className="navbar-brand" to="/">Series</Link>
@@ -23,10 +37,17 @@ export default class Navbar extends Component{
                         <a className="nav-link" href="./autores">Autores</a>
                     </li>
                 </ul>
-                <form className="form-inline my-2 my-lg-0">
-                    <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                
+                   
+                    <button className="btn btn-outline-danger my-2 my-sm-0 " type="submit"
+                    onClick={ ()=>{
+                        signOut()
+                        this.setState({signOut: true})
+
+                    }
+                    }
+                    >Search</button>
+               
             </div>
         </nav>
 
