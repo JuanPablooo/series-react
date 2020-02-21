@@ -20,33 +20,23 @@ export default class Loguin extends Component{
         this.setState({[name]:value})
     }
     signIn = async (e)=>{
+
         e.preventDefault()
-        const {email, senha} = this.state;
-        const params = {
-            method:"POST",
-            headers: {
-                Accept: 'application/json',
-                "Content-type": 'application/json'
-            },
-            body: JSON.stringify({
-                email:email,
-                senha: senha
-            })
-        }
-        try {
-            const retorno = await fetch("http://localhost:3000/auth/autenticar", params)
-            console.log(retorno)
+        try{
+
+        const usuario = this.state;
+        delete usuario.msgErro;
+
+
+        const retorno = await signIn(usuario)
             
-                if(retorno.status === 400){
-                    const {erro} = await retorno.json();
-                    return this.setState({msgErro: erro})
-                }
-                if(retorno.ok){
-                    const usuario = await retorno.json();
-                    console.log(usuario)
-                    signIn(usuario)
-                    this.props.history.push('/');
-            }
+        if(retorno.status === 400){
+            console.log("400")
+            const {erro} = await retorno.json();
+            return this.setState({msgErro: erro})
+        }
+        if(retorno.ok) this.props.history.push('/');
+            
         } 
         catch (erro) {
             console.log(erro)
